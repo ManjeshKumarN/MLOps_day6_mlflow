@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/0/d571b2f7dbda462f875c0a24871d7f89/artifacts
+end_time: 1760622751094
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: d571b2f7dbda462f875c0a24871d7f89
+run_name: industrious-croc-324
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1760622750827
+status: 3
+tags: []
+user_id: codespace
