@@ -54,10 +54,6 @@ with mlflow.start_run():
     # of experiments and runs
     
     # log model
-    mlflow.sklearn.log_model(rf,
-    artifact_path="random_forest_model",
-    signature=mlflow.models.infer_signature(X_train, rf.predict(X_train)),
-    input_example=X_train[:2]
-    )
+    mlflow.sklearn.load_model(rf, "Random-Forest-Model")
 
     print(mlflow.get_tracking_uri()) # http://127.0.0.1:5000
