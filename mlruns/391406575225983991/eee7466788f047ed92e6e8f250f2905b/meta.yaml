@@ -1,0 +1,15 @@
+artifact_uri: file:///workspaces/MLOps_day6_mlflow/mlruns/391406575225983991/eee7466788f047ed92e6e8f250f2905b/artifacts
+end_time: 1761347386605
+entry_point_name: ''
+experiment_id: '391406575225983991'
+lifecycle_stage: active
+run_id: eee7466788f047ed92e6e8f250f2905b
+run_name: carefree-croc-182
+run_uuid: eee7466788f047ed92e6e8f250f2905b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1761347377058
+status: 3
+tags: []
+user_id: codespace
