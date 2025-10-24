@@ -1,4 +1,4 @@
-# local tracking
+# remote tracking
 import mlflow
 import mlflow.sklearn
 from sklearn.datasets import load_wine
@@ -8,8 +8,10 @@ from sklearn.metrics import accuracy_score, confusion_matrix
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# set the tracking uri to local server
-mlflow.set_tracking_uri("http://127.0.0.1:5000")
+import dagshub
+dagshub.init(repo_owner='manjesh2700c', repo_name='MLOps_day6_mlflow', mlflow=True)
+
+mlflow.set_tracking_uri("https://dagshub.com/manjesh2700c/MLOps_day6_mlflow.mlflow")
 
 # Load Wine dataset
 wine = load_wine()
@@ -61,4 +63,4 @@ with mlflow.start_run():
     input_example=X_train[:2]
     )
 
-    print(mlflow.get_tracking_uri()) # http://127.0.0.1:5000
+    print(mlflow.get_tracking_uri())

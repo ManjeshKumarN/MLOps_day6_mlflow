@@ -1,4 +1,4 @@
-# local tracking
+# remote tracking and autolog
 import mlflow
 import mlflow.sklearn
 from sklearn.datasets import load_wine
@@ -8,8 +8,10 @@ from sklearn.metrics import accuracy_score, confusion_matrix
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# set the tracking uri to local server
-mlflow.set_tracking_uri("http://127.0.0.1:5000")
+import dagshub
+dagshub.init(repo_owner='manjesh2700c', repo_name='MLOps_day6_mlflow', mlflow=True)
+
+mlflow.set_tracking_uri("https://dagshub.com/manjesh2700c/MLOps_day6_mlflow.mlflow")
 
 # Load Wine dataset
 wine = load_wine()
@@ -24,6 +26,7 @@ max_depth = 10
 n_estimators = 11
 
 # set the experiment name
+mlflow.autolog()
 mlflow.set_experiment("Wine_Quality_Experiment")
 
 with mlflow.start_run():
@@ -33,10 +36,6 @@ with mlflow.start_run():
     y_pred = rf.predict(X=X_test)
     accuracy = accuracy_score(y_true=y_test, y_pred=y_pred)
 
-    mlflow.log_metric("accuracy", accuracy)
-    mlflow.log_param("max_depth", max_depth)
-    mlflow.log_param("n_estimators", n_estimators)
-
     # creating the confusion matrix
     cm = confusion_matrix(y_true=y_test, y_pred=y_pred)
     plt.figure(figsize=(8, 6))
@@ -45,20 +44,11 @@ with mlflow.start_run():
     plt.ylabel('Actual')
     plt.title('Confusion Matrix')
 
-    # save the plot
-    plt.savefig("confusion_matrix.png")
-    mlflow.log_artifact("confusion_matrix.png")
-    mlflow.log_artifact(__file__) # can even log the current script
+    mlflow.log_artifact(__file__) # can even log the current script, autolog will not log the file automatically
 
     # log tags
     mlflow.set_tags({"Author":"Manjesh","Project":"Wine classification"}) # can log the tag as dictionary, which can used as top level identification
     # of experiments and runs
+    # autolog will not log the tags automatically
     
-    # log model
-    mlflow.sklearn.log_model(rf,
-    artifact_path="random_forest_model",
-    signature=mlflow.models.infer_signature(X_train, rf.predict(X_train)),
-    input_example=X_train[:2]
-    )
-
-    print(mlflow.get_tracking_uri()) # http://127.0.0.1:5000
+    print(mlflow.get_tracking_uri())
